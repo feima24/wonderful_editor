@@ -1,9 +1,5 @@
 require_relative "boot"
 
-config.after_initialize do
-  Annotate.load_tasks
-end
-
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
