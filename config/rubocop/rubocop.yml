@@ -103,17 +103,17 @@ Lint/UnusedMethodArgument:
 Lint/Void:
   CheckForMethodsWithNoSideEffects: true
 
-#################### Layout ###############################
+#################### Metrics ###############################
 
 # 30 まではギリギリ許せる範囲だったけど
 # リリースごとに 3 ずつぐらい下げていきます。20 まで下げたい。
-Layout/AbcSize:
+Metrics/AbcSize:
   Max: 24
 
 # Gemfile, Guardfile は DSL 的で基本的に複雑にはならないので除外
 # rake, rspec, environments, routes は巨大な block 不可避なので除外
 # TODO: ExcludedMethods の精査
-Layout/BlockLength:
+Metrics/BlockLength:
   Exclude:
     - "Rakefile"
     - "**/*.rake"
@@ -126,7 +126,7 @@ Layout/BlockLength:
     - "*.gemspec"
 
 # 6 は強すぎるので緩める
-Layout/CyclomaticComplexity:
+Metrics/CyclomaticComplexity:
   Max: 10
 
 # * 警告 120文字
@@ -138,13 +138,13 @@ Layout/LineLength:
     - "db/migrate/*.rb"
 
 # 20 行超えるのは migration ファイル以外滅多に無い
-Layout/MethodLength:
+Metrics/MethodLength:
   Max: 20
   Exclude:
     - "db/migrate/*.rb"
 
 # 分岐の数。ガード句を多用しているとデフォルト 7 だと厳しい
-Layout/PerceivedComplexity:
+Metrics/PerceivedComplexity:
   Max: 8
 
 #################### Naming ################################

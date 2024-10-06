@@ -38,6 +38,7 @@ group :development, :test do
   gem "pry-doc"
   gem "pry-rails"
   gem "rspec-rails"
+  gem "rubocop-factory_bot"
   gem "rubocop-rails"
   gem "rubocop-rspec"
 end
