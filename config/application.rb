@@ -40,11 +40,12 @@ module WonderfulEditor
       g.stylesheets false
       g.helper false
       g.test_framework :rspec,
+                       fixtures: true, # factory_botのファイルを作成する
                        view_specs: false,
                        routing_specs: false,
                        helper_specs: false,
                        controller_specs: false,
-                       request_specs: true
+                       request_specs: true # request_specsに関するファイルを作成する
     end
 
     config.api_only = true

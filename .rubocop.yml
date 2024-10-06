@@ -7,4 +7,5 @@ inherit_from:
   - config/rubocop/rspec.yml
 
 AllCops:
+ NewCops: enable
   TargetRubyVersion: 2.7
