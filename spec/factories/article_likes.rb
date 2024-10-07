@@ -24,7 +24,4 @@ FactoryBot.define do
     association :user
     association :article
   end
-
-  factory :existing_article_like, parent: :article_like do # rubocop:disable Lint/EmptyBlock
-  end
 end
