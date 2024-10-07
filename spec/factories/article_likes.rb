@@ -20,8 +20,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
-  factory :existing_article_like, parent: :article_like do
+  factory :article_like do
     association :user
     association :article
+  end
+
+  factory :existing_article_like, parent: :article_like do # rubocop:disable Lint/EmptyBlock
   end
 end
