@@ -21,6 +21,4 @@
 class ArticleLike < ApplicationRecord
   belongs_to :user
   belongs_to :article
-
-  validates :user_id, uniqueness: { scope: :article_id, message: "はこの記事に対してすでにいいねしています" }
 end
