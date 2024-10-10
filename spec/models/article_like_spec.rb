@@ -1,21 +1,61 @@
 require "rails_helper"
 
 RSpec.describe ArticleLike, type: :model do
-  context "まだ「いいね」してない場合" do
-    let(:article_like) { build(:article_like) }
+  let(:user) { create(:user) }
+  let(:article) { create(:article) }
 
-    it "そのユーザーは記事に「いいね」できる" do
+  context "全ての属性が正しく関連付けられている場合" do
+    it "ユーザーは記事に「いいね」を押せる" do
+      article_like = build(:article_like, user: user, article: article)
       expect(article_like).to be_valid
     end
   end
 
-  context "既に「いいね」している場合" do
-    let!(:existing_article_like) { create(:article_like) } # すでに「いいね」されている状態
-    let(:article_like) { build(:article_like, user: existing_article_like.user, article: existing_article_like.article) }
+  context "user_idが存在しない場合" do
+    it "ユーザーは記事に「いいね」を押せない" do # rubocop:disable RSpec/MultipleExpectations
+      article_like = build(:article_like, user: nil, article: article)
+      expect(article_like).to be_invalid
+      expect(article_like.errors[:user_id]).to include("can't be blank")
+    end
+  end
 
-    it "そのユーザーは記事に「いいね」できない" do # rubocop:disable RSpec/MultipleExpectations
-      expect(article_like).not_to be_valid
-      expect(article_like.errors[:user_id]).to include("has already been taken") # ユーザーIDの重複エラーメッセージを確認
+  context "article_idが存在しない場合" do
+    it "ユーザーは記事に「いいね」を押せない" do # rubocop:disable RSpec/MultipleExpectations
+      article_like = build(:article_like, user: user, article: nil)
+      expect(article_like).to be_invalid
+      expect(article_like.errors[:article_id]).to include("can't be blank")
+    end
+  end
+
+  context "user_idとarticle_idの組み合わせが重複する場合" do
+    before do
+      create(:article_like, user: user, article: article)
+    end
+
+    it "ユーザーは記事に「いいね」を押せない" do # rubocop:disable RSpec/MultipleExpectations
+      duplicate_like = build(:article_like, user: user, article: article)
+      expect(duplicate_like).to be_invalid
+      expect(duplicate_like.errors[:user_id]).to include("has already been taken")
+    end
+  end
+
+  context "同じユーザーが異なる記事にいいねする場合" do
+    let(:another_article) { create(:article) }
+
+    it "ユーザーは記事に「いいね」を押せる" do
+      create(:article_like, user: user, article: article)
+      another_like = build(:article_like, user: user, article: another_article)
+      expect(another_like).to be_valid
+    end
+  end
+
+  context "異なるユーザーが同じ記事にいいねする場合" do
+    let(:another_user) { create(:user) }
+
+    it "ユーザーは記事に「いいね」を押せる" do
+      create(:article_like, user: user, article: article)
+      another_like = build(:article_like, user: another_user, article: article)
+      expect(another_like).to be_valid
     end
   end
 end
