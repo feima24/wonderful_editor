@@ -48,4 +48,31 @@ RSpec.describe "Api::V1::Articles", type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe "PATCH /api/v1/articles/:id" do
+    subject { patch(api_v1_article_path(article.id), params: params) }
+
+    let(:params) { { article: attributes_for(:article) } }
+    let(:current_user) { create(:user) }
+    before { allow_any_instance_of(Api::V1::BaseApiController).to receive(:current_user).and_return(current_user) } # rubocop:disable RSpec/AnyInstance
+
+    context "自分が所持している記事のレコードを更新しようとするとき" do
+      let(:article) { create(:article, user: current_user) }
+
+      it "記事を更新できる" do # rubocop:disable RSpec/MultipleExpectations
+        expect { subject }.to change { article.reload.title }.from(article.title).to(params[:article][:title]) &
+                              change { article.reload.body }.from(article.body).to(params[:article][:body])
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "自分が所持していない記事のレコードを更新しようとするとき" do
+      let(:other_user) { create(:user) }
+      let!(:article) { create(:article, user: other_user) }
+
+      it "更新できない" do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end
