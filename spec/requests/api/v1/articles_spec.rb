@@ -58,11 +58,19 @@ RSpec.describe "Api::V1::Articles", type: :request do
 
     context "自分が所持している記事のレコードを更新しようとするとき" do
       let(:article) { create(:article, user: current_user) }
+      let(:params) { { article: { title: "更新されたタイトル", body: "更新された本文" } } }
 
-      it "記事を更新できる" do # rubocop:disable RSpec/MultipleExpectations
-        expect { subject }.to change { article.reload.title }.from(article.title).to(params[:article][:title]) &
-                              change { article.reload.body }.from(article.body).to(params[:article][:body])
+      it "レスポンスが正常である" do
+        subject
         expect(response).to have_http_status(:ok)
+      end
+
+      it "タイトルが更新される" do
+        expect { subject }.to change { article.reload.title }.from(article.title).to(params[:article][:title])
+      end
+
+      it "本文が更新される" do
+        expect { subject }.to change { article.reload.body }.from(article.body).to(params[:article][:body])
       end
     end
 
