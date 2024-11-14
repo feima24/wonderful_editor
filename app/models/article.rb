@@ -23,4 +23,10 @@ class Article < ApplicationRecord
   has_many :article_likes, dependent: :destroy
 
   validates :title, presence: true
+
+  # stringカラムの場合は、enumの定義を以下のようにします
+  enum status: { draft: "draft", published: "published" }
+
+  # draftスコープの定義
+  scope :draft, -> { where(status: :draft) }
 end
