@@ -23,9 +23,12 @@ FactoryBot.define do
     body { Faker::Lorem.sentence }
     user
 
+    trait :published do
+      status { "published" }
+    end
+
     trait :draft do
-      # ステータスが「draft」の場合
-      status { "draft" } # ここでstatusを'draft'に設定
+      status { "draft" }
     end
   end
 end

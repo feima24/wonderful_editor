@@ -29,4 +29,5 @@ class Article < ApplicationRecord
 
   # draftスコープの定義
   scope :draft, -> { where(status: :draft) }
+  scope :published, -> { where(status: "published") }
 end
