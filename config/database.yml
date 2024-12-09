@@ -19,7 +19,7 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['WONDERFUL_EDITOR_DATABASE_USERNAME'] %>
-  password: <%= ENV['WONDERFUL-EDITOR_DATABASE_PASSWORD'] %>
+  password: <%= ENV['WONDERFUL_EDITOR_DATABASE_PASSWORD'] %>
   host: <%= ENV['WONDERFUL_EDITOR_DATABASE_HOST'] %>
 
 development:
