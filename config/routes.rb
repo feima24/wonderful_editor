@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      namespace :current do
+        get 'articles/index'
+      end
+    end
+  end
   root to: "home#index"
 
   # reload 対策
