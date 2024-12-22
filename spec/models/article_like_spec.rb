@@ -15,7 +15,7 @@ RSpec.describe ArticleLike, type: :model do
     it "ユーザーは記事に「いいね」を押せない" do # rubocop:disable RSpec/MultipleExpectations
       article_like = build(:article_like, user: nil, article: article)
       expect(article_like).to be_invalid
-      expect(article_like.errors[:user_id]).to include("can't be blank")
+      expect(article_like.errors[:user]).to include("must exist")
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe ArticleLike, type: :model do
     it "ユーザーは記事に「いいね」を押せない" do # rubocop:disable RSpec/MultipleExpectations
       article_like = build(:article_like, user: user, article: nil)
       expect(article_like).to be_invalid
-      expect(article_like.errors[:article_id]).to include("can't be blank")
+      expect(article_like.errors[:article]).to include("must exist")
     end
   end
 
