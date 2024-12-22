@@ -22,6 +22,5 @@ class ArticleLike < ApplicationRecord
   belongs_to :user
   belongs_to :article
 
-  validates :user_id, presence: true, uniqueness: { scope: :article_id } # rubocop:disable Rails/UniqueValidationWithoutIndex
-  validates :article_id, presence: true
+  validates :user_id, uniqueness: { scope: :article_id } # rubocop:disable Rails/UniqueValidationWithoutIndex
 end
