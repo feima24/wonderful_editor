@@ -9,7 +9,7 @@ RSpec.describe "V1::Auth::Registrations", type: :request do
       it "ユーザーの新規登録ができる" do # rubocop:disable RSpec/MultipleExpectations
         expect { subject }.to change { User.count }.by(1)
         expect(response).to have_http_status(:ok)
-        res = JSON.parse(response.body)
+        res = response.parsed_body
         expect(res["data"]["email"]).to eq(User.last.email)
       end
 
@@ -28,7 +28,7 @@ RSpec.describe "V1::Auth::Registrations", type: :request do
       let(:params) { attributes_for(:user, name: nil) }
       it "エラーする" do # rubocop:disable RSpec/MultipleExpectations
         expect { subject }.not_to change { User.count }
-        res = JSON.parse(response.body)
+        res = response.parsed_body
         expect(response).to have_http_status(:unprocessable_entity)
         expect(res["errors"]["name"]).to include "can't be blank"
       end
@@ -38,7 +38,7 @@ RSpec.describe "V1::Auth::Registrations", type: :request do
       let(:params) { attributes_for(:user, email: nil) }
       it "エラーする" do # rubocop:disable RSpec/MultipleExpectations
         expect { subject }.not_to change { User.count }
-        res = JSON.parse(response.body)
+        res = response.parsed_body
         expect(response).to have_http_status(:unprocessable_entity)
         expect(res["errors"]["email"]).to include "can't be blank"
       end
@@ -48,7 +48,7 @@ RSpec.describe "V1::Auth::Registrations", type: :request do
       let(:params) { attributes_for(:user, password: nil) }
       it "エラーする" do # rubocop:disable RSpec/MultipleExpectations
         expect { subject }.not_to change { User.count }
-        res = JSON.parse(response.body)
+        res = response.parsed_body
         expect(response).to have_http_status(:unprocessable_entity)
         expect(res["errors"]["password"]).to include "can't be blank"
       end

@@ -24,7 +24,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
 
       it "ログインできない" do # rubocop:disable RSpec/MultipleExpectations
         subject
-        res = JSON.parse(response.body)
+        res = response.parsed_body
         header = response.header
         expect(res["errors"]).to include "Invalid login credentials. Please try again."
         expect(header["access-token"]).to be_blank
@@ -40,7 +40,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
 
       it "ログインできない" do # rubocop:disable RSpec/MultipleExpectations
         subject
-        res = JSON.parse(response.body)
+        res = response.parsed_body
         header = response.header
         expect(res["errors"]).to include "Invalid login credentials. Please try again."
         expect(header["access-token"]).to be_blank
@@ -71,7 +71,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
       it "ログアウトできない" do # rubocop:disable RSpec/MultipleExpectations
         subject
         expect(response).to have_http_status(:not_found)
-        res = JSON.parse(response.body)
+        res = response.parsed_body
         expect(res["errors"]).to include "User was not found or was not logged in."
       end
     end

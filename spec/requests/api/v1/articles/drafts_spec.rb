@@ -13,7 +13,7 @@ RSpec.describe "Api::V1::Articles::Drafts", type: :request do
 
       it "自分が書いた下書き記事の一覧のみが取得できる" do # rubocop:disable RSpec/MultipleExpectations
         subject
-        res = JSON.parse(response.body)
+        res = response.parsed_body
 
         expect(response).to have_http_status(:ok)
         expect(res.length).to eq 1
@@ -35,7 +35,7 @@ RSpec.describe "Api::V1::Articles::Drafts", type: :request do
 
         it "記事の詳細を取得できる" do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
           subject
-          res = JSON.parse(response.body)
+          res = response.parsed_body
 
           expect(response).to have_http_status(:ok)
           expect(res["id"]).to eq article.id

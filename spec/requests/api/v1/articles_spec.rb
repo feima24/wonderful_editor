@@ -10,7 +10,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
 
       it "任意の記事の値が取得できる" do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
         subject
-        res = JSON.parse(response.body)
+        res = response.parsed_body
 
         expect(response).to have_http_status(:ok)
         expect(res["id"]).to eq article.id
@@ -41,7 +41,7 @@ RSpec.describe "Api::V1::Articles", type: :request do
 
     it "記事のレコードが作成できる" do # rubocop:disable RSpec/MultipleExpectations
       expect { subject }.to change { Article.where(user_id: current_user.id).count }.by(1)
-      res = JSON.parse(response.body)
+      res = response.parsed_body
       expect(res["title"]).to eq params[:article][:title]
       expect(res["body"]).to eq params[:article][:body]
       expect(response).to have_http_status(:ok)
