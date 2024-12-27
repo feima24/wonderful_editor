@@ -1,5 +1,6 @@
 require:
   - rubocop-rails
+  - rubocop-factory_bot
 
 inherit_from:
   - config/rubocop/rubocop.yml
@@ -8,3 +9,4 @@ inherit_from:
 
 AllCops:
   TargetRubyVersion: 2.7
+  NewCops: enable

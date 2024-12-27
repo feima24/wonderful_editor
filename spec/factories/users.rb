@@ -31,8 +31,16 @@
 FactoryBot.define do
   factory :user do
     name { Faker::Lorem.characters(number: Random.new.rand(1..30)) }
-    sequence(:email) {|n| "#{n}_#{Faker::Internet.email}" }
+    email { Faker::Internet.email }
     password { Faker::Internet.password(min_length: 8, max_length: 32, mix_case: true, special_characters: true) }
     password_confirmation { password } # passwordと同じ値を設定
+
+    trait :with_email do
+      sequence(:email) {|n| "#{n}_#{Faker::Internet.email}" }
+    end
+
+    trait :without_email do
+      email { nil }
+    end
   end
 end

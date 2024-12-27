@@ -19,9 +19,9 @@ RSpec.describe "Api::V1::Current::Articles", type: :request do
 
       it "自分の書いた公開記事を更新順に取得できる" do # rubocop:disable RSpec/MultipleExpectations
         subject
-        res = JSON.parse(response.body)
+        res = response.parsed_body
         expect(res.length).to eq 3
-        expect(res.map {|d| d["id"] }).to eq [article3.id, article1.id, article2.id]
+        expect(res.pluck("id")).to eq [article3.id, article1.id, article2.id]
         expect(res[0]["user"]["id"]).to eq current_user.id
         expect(res[0]["user"]["name"]).to eq current_user.name
         expect(res[0]["user"]["email"]).to eq current_user.email
