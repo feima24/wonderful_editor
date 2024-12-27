@@ -19,8 +19,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
-  belongs_to :user, optional: false
-  belongs_to :article, optional: false
+  belongs_to :user
+  belongs_to :article
 
   validates :body, presence: true
 end

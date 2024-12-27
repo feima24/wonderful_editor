@@ -35,11 +35,11 @@ RSpec.describe "V1::Auth::Registrations", type: :request do
     end
 
     context "email が存在しないとき" do
-      let(:params) { attributes_for(:user, email: nil) }
+      let(:params) { attributes_for(:user, :without_email) }
       it "エラーする" do # rubocop:disable RSpec/MultipleExpectations
         expect { subject }.not_to change { User.count }
         res = response.parsed_body
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_entity) # 422
         expect(res["errors"]["email"]).to include "can't be blank"
       end
     end
