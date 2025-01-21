@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-# サービス概要
-=======
 # アプリURL
 https://wonderful-editor-nb6h.onrender.com/
 
-#　サービス概要
->>>>>>> origin/readme
+# サービス概要
 Qiitaをイメージしたマークダウン記法に対応した記事共有アプリです。
 
 # サービスを開発した背景
@@ -13,11 +9,7 @@ Qiitaをイメージしたマークダウン記法に対応した記事共有ア
 
 # 画面や機能の説明
 ・RSpecを用いたテストコードを実装
-<<<<<<< HEAD
 ・ユーザー登録とログイン機能、投稿のCRUD機能といった基本機能を実装
-=======
-・ユーザー登録とログイン機能、投稿のCRUD機能といった基本機能を実装しています。
->>>>>>> origin/readme
 ・gem「devise」を活用しログイン機能を実装
 
 # 主な使用技術
@@ -35,11 +27,7 @@ Qiitaをイメージしたマークダウン記法に対応した記事共有ア
 ・HTML
 
 ## データベース
-<<<<<<< HEAD
-・MySQL
-=======
-・MySQL 　
+・PostgreSQL
 
 # ER図
-![ER図](./images/erd.png)
->>>>>>> origin/readme
+![ER図](images/erd.png)
