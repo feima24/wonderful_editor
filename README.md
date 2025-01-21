@@ -1,6 +1,3 @@
-# アプリURL
-https://wonderful-editor-nb6h.onrender.com/
-
 # サービス概要
 Qiitaをイメージしたマークダウン記法に対応した記事共有アプリです。
 
@@ -27,4 +24,4 @@ Qiitaをイメージしたマークダウン記法に対応した記事共有ア
 ・HTML
 
 ## データベース
-・MySQL 　
+・MySQL
